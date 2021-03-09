@@ -13,8 +13,8 @@ void check_BST(struct Tree_Node *linked_list) {
 }
 
 void insert_leaf(struct Tree_Node *subtree, struct Tree_Node *temp) {
-    assert(subtree);
-    assert(temp);
+   // assert(subtree);
+    //assert(temp);
     if(subtree->value > temp -> value) {
         if(subtree -> left != NULL) {
             insert_leaf(subtree -> left, temp);
@@ -28,6 +28,17 @@ void insert_leaf(struct Tree_Node *subtree, struct Tree_Node *temp) {
     }
 }
 
+void print_tree(struct Tree_Node *subtree) {
+   // assert(subtree);
+    if(subtree->left != NULL) {
+        print_tree(subtree->left);
+    }
+    printf("%d\n", subtree->right);
+    if(subtree->right != NULL) {
+        print_tree(subtree->right);
+    }
+}
+
 struct Tree_Node *build_BST(Linked_Pair *linked_list) {
    // struct Tree_Node* temp2 = malloc(sizeof(struct Tree_Node));
   struct Pair* temp = malloc(sizeof(struct Pair));
@@ -38,7 +49,10 @@ temp = linked_list;
     while (temp != NULL)
     {
         struct Tree_Node* tree = malloc(sizeof(struct Tree_Node));
-        insert_leaf(tree, temp);
+        struct Tree_Node* headNode = malloc(sizeof(struct Tree_Node));
+        headNode -> value = temp -> value;
+        headNode -> name = temp -> value;  
+        insert_leaf(headNode, temp);
         temp = temp -> next;
     }
     
